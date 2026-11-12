@@ -1,4 +1,7 @@
-﻿namespace Doga20261112
+﻿using System.Reflection.Metadata;
+using System.Security.Cryptography.X509Certificates;
+
+namespace Doga20261112
 {
     internal class Program
     {
@@ -98,6 +101,11 @@
             return tomb;
         }
 
+        static void LeghosszabbNovekvo()
+        {
+            Console.WriteLine("Ezt a feladatot nem sikeült elkészítenem :c");
+        }
+
         static void AtlagAlattiDuplaza()
         {
             int ossz = 0;
@@ -134,6 +142,7 @@
             {
                 Console.Write(szamok[i]+", ");
             }
+            LeghosszabbNovekvo();
             Console.WriteLine();
             AtlagAlattiDuplaza();
         }
@@ -148,7 +157,7 @@
         }
         static void Main(string[] args)
         {
-            //feladat1();
+            feladat1();
             feladat2();
         }
     }
