@@ -4,7 +4,6 @@
     {
         static Random random = new Random();
         static string[] huto = { "Tej", "", "Saláta", "", "Alma", "", "Sajt", "", "Ananász" };
-        static int[] szamok = new int[10];
         
         static void Takarit()
         {
@@ -71,26 +70,44 @@
 
         static int[] FeltoltEgyediekkel(int min, int max)
         {
+            int[] tomb = new int[10];
             int veletlenszam = 0;
-
-            for (int i = 0; i < szamok.Length; i++)
+            bool van = false;
+            for (int i = 0; i < 10; i++)
             {
-                veletlenszam = random.Next(min, max + 1);
-                szamok[i] = veletlenszam;
+                veletlenszam = random.Next(min, max);
+                if (tomb.Contains(veletlenszam))
+                {
+                    van = true;
+                    while ( van == true )
+                    {
+                        veletlenszam = random.Next(min, max);
+                        if (tomb.Contains(veletlenszam) == false )
+                        {
+                            van = false;
+                            tomb[i] = veletlenszam;
+                        }
+                    }
+                }
+                else
+                {
+                    tomb[i] = veletlenszam;
+                }
             }
-
-            return szamok;
+            return tomb;
         }
 
         static void feladat2()
         {
             Console.WriteLine("Mennyi legyen a minimum értéke a számaidnak?");
-            int min = 10;
-
+            int min = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Mennyi legyen a maximum értéke a számaidnak?");
-            int max = 30;
-
-            FeltoltEgyediekkel(min, max);
+            int max = Convert.ToInt32(Console.ReadLine());
+            int[] szamok = FeltoltEgyediekkel(min, max);
+            for (int i = 0; i < szamok.Length; i++)
+            {
+                Console.WriteLine(szamok[i]);
+            }
         }
 
 
@@ -103,8 +120,8 @@
         }
         static void Main(string[] args)
         {
-            feladat1();
-            //feladat2();
+            //feladat1();
+            feladat2();
         }
     }
 }
