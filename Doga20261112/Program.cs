@@ -3,34 +3,29 @@
     internal class Program
     {
         static Random random = new Random();
-        static string[] huto = { "Tej", "", "", "", "Alma", "", "h", "", "Ananász" };
+        static string[] huto = { "Tej", "", "Saláta", "", "Alma", "", "Sajt", "", "Ananász" };
         static int[] szamok = new int[10];
         
         static void Takarit()
         {
-            int darabszam = 0;
             string[] seged = new string[huto.Length];
             int y = 0;
-            for (int i = 0; i < huto.Length; i++, y++)
+            for (int i = 0; i < huto.Length; i++)
             {
                 if (huto[i] != "")
                 {
                     seged[y] = huto[i];
+                    y++;
                 }
             }
-            for (int i = 0; i < seged.Length; i++)
-            {
-                Console.WriteLine(seged[i]);  
-            }
+            huto = seged;
+            int darabszam = 0;
             for (int i = 0; i < huto.Length; i++)
             {
-               if (huto[i] == "")
-               {
-               }
-               else
-               {
+                if (huto[i] != null)
+                {
                     darabszam++;
-               }
+                }
             }
             Console.WriteLine(darabszam);
         }
@@ -62,7 +57,7 @@
             string maganhangzok = "aáeéöőüűií";
             foreach (var item in huto)
             {
-                if (item != "") { 
+                if (item != null) { 
                     char elsoKarakter = char.ToLower(item[0]);
                     if (maganhangzok.Contains(elsoKarakter))
                     {
@@ -101,7 +96,7 @@
 
         static void feladat1()
         {
-            //Takarit();
+            Takarit();
             KeresEtel();
             maganhangzo();
 
