@@ -4,6 +4,7 @@
     {
         static Random random = new Random();
         static string[] huto = { "Tej", "", "Saláta", "", "Alma", "", "Sajt", "", "Ananász" };
+        static int[] szamok = new int[10];
         
         static void Takarit()
         {
@@ -70,18 +71,18 @@
 
         static int[] FeltoltEgyediekkel(int min, int max)
         {
-            int[] tomb = new int[10];
+            int[] tomb = new int[szamok.Length];
             int veletlenszam = 0;
             bool van = false;
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < szamok.Length; i++)
             {
                 veletlenszam = random.Next(min, max);
-                if (tomb.Contains(veletlenszam))
+                if (tomb.Contains(veletlenszam) == true)
                 {
                     van = true;
-                    while ( van == true )
+                    while ( van )
                     {
-                        veletlenszam = random.Next(min, max);
+                        veletlenszam = random.Next(min, max+1);
                         if (tomb.Contains(veletlenszam) == false )
                         {
                             van = false;
@@ -89,12 +90,36 @@
                         }
                     }
                 }
-                else
+                else if (tomb.Contains(veletlenszam) == false)
                 {
                     tomb[i] = veletlenszam;
                 }
             }
             return tomb;
+        }
+
+        static void AtlagAlattiDuplaza()
+        {
+            int ossz = 0;
+            for (int i = 0; i < szamok.Length; i++)
+            {
+                ossz += szamok[i];
+            }
+            int atlag = ossz / szamok.Length;
+            Console.WriteLine("A tömb értékeinek átlaga: "+atlag);
+            Console.WriteLine("A tömb szerkeztve:");
+            for (int i = 0; i < szamok.Length; i++)
+            {
+                if (szamok[i] < atlag )
+                {
+                    szamok[i] = szamok[i]*2;
+                }
+
+            }
+            for (int i = 0; i < szamok.Length; i++)
+            {
+                Console.Write(szamok[i]+", ");
+            }
         }
 
         static void feladat2()
@@ -103,11 +128,14 @@
             int min = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Mennyi legyen a maximum értéke a számaidnak?");
             int max = Convert.ToInt32(Console.ReadLine());
-            int[] szamok = FeltoltEgyediekkel(min, max);
+            szamok  = FeltoltEgyediekkel(min, max);
+            Console.WriteLine("A tömb elemei:");
             for (int i = 0; i < szamok.Length; i++)
             {
-                Console.WriteLine(szamok[i]);
+                Console.Write(szamok[i]+", ");
             }
+            Console.WriteLine();
+            AtlagAlattiDuplaza();
         }
 
 
